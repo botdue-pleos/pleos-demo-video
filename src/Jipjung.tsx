@@ -1,19 +1,19 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { TransitionPresentation, TransitionSeries } from "@remotion/transitions";
-import { slide } from "@remotion/transitions/slide";
-import { wipe } from "@remotion/transitions/wipe";
+import { fade } from "@remotion/transitions/fade";
 import { RepoBig } from "./common";
-import { NIGHT, RepoChip } from "./display";
-import { EngineFlow, Look, Story } from "./story";
-import { FONT, HY, Kinetic, Line, PixelLogo, circle, ease, p, pop } from "./kit";
+import { RepoChip } from "./display";
+import { EngineFlow, Look } from "./story";
+import { Cinema, Letterbox } from "./grammar";
+import { FONT, HY, Kinetic, Line, PixelLogo, ease, p, pop } from "./kit";
 
 /*
  * 집중잔량 시연 영상. 1920x1080 30fps, 무음·자막.
  * 공감 → 문제 숫자 → 로고 → 실제 녹화 7장면 → 판정 엔진 → 마무리.
  */
 
-const LOOK: Look = { bg: HY.night, ink: HY.lightSand, sub: HY.skyBlue, accent: HY.activeBlue };
+const LOOK: Look = { bg: HY.blue, ink: HY.lightSand, sub: HY.skyBlue, accent: HY.activeBlue };
 const LOGO = [HY.activeBlue, HY.activeBlue, HY.deepBlue, HY.activeBlue, HY.sand, HY.deepBlue, HY.activeBlue, HY.activeBlue, HY.activeBlue];
 
 /** 6시~24시 막대 높이 (앱의 하루 집중 곡선과 같은 모양) */
@@ -22,7 +22,7 @@ const CURVE = [1, 1, 1, 1, 3, 1, 2, 1, 2, 2, 4, 1, 6, 2, 4, 2, 2, 1];
 const Hook: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: HY.night, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
+    <AbsoluteFill style={{ background: HY.blue, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
       <Kinetic text={"퇴근길, 약효가 떨어질 즈음\n회전 안내를 또 놓쳤다"} start={6} size={88} color={HY.lightSand} />
       <div style={{ display: "flex", gap: 10, marginTop: 64, alignItems: "flex-end" }}>
         {CURVE.map((h, col) => (
@@ -38,7 +38,7 @@ const Hook: React.FC = () => {
                 <div
                   key={row}
                   style={{
-                    width: 52, height: 52, borderRadius: 8, boxSizing: "border-box",
+                    width: 52, height: 52, borderRadius: 26, boxSizing: "border-box",
                     background: filled ? color : "transparent",
                     border: filled ? "none" : `3px solid ${evening ? HY.activeBlue : "#2A5A8F"}`,
                     scale: String(filled ? a : 1), opacity: filled ? a : p(f, 40, 12),
@@ -61,21 +61,21 @@ const Stat: React.FC<{ big: string; label: string; src: string; at: number }> = 
   const a = p(f, at, 22);
   return (
     <div style={{ opacity: a, translate: `0 ${(1 - a) * 50}px`, maxWidth: 760 }}>
-      <div style={{ fontSize: 180, fontWeight: 800, color: HY.blue, letterSpacing: "-0.04em", lineHeight: 1 }}>{big}</div>
-      <div style={{ fontSize: 30, fontWeight: 600, color: HY.sub, marginTop: 18, lineHeight: 1.45 }}>{label}</div>
-      <div style={{ fontSize: 22, fontWeight: 500, color: HY.sub, opacity: 0.85, marginTop: 12, lineHeight: 1.45 }}>{src}</div>
+      <div style={{ fontSize: 170, fontWeight: 800, color: HY.lightSand, letterSpacing: "-0.04em", lineHeight: 1 }}>{big}</div>
+      <div style={{ fontSize: 30, fontWeight: 600, color: HY.skyBlue, marginTop: 18, lineHeight: 1.45 }}>{label}</div>
+      <div style={{ fontSize: 22, fontWeight: 500, color: HY.skyBlue, opacity: 0.85, marginTop: 12, lineHeight: 1.45 }}>{src}</div>
     </div>
   );
 };
 
 const Stats: React.FC = () => (
-  <AbsoluteFill style={{ background: HY.daySky, fontFamily: FONT, padding: "150px 140px" }}>
+  <AbsoluteFill style={{ background: HY.blue, fontFamily: FONT, padding: "190px 140px" }}>
     <div style={{ display: "flex", gap: 140 }}>
       <Stat at={4} big="4.85배" label="20세 이상 ADHD 진료 인원, 2020년 2만 5,297명에서 2024년 12만 2,614명" src="출처: 국민건강보험공단 자료, 남인순 의원실 분석 (헤럴드경제 2025.10.07 보도)" />
       <Stat at={28} big="38~42%" label="ADHD 약을 먹은 달의 운전 사고 위험 감소 (남성 38%, 여성 42%)" src="출처: Chang et al., JAMA Psychiatry 2017 (미국 청구자료 230만 명)" />
     </div>
-    <div style={{ position: "absolute", left: 140, bottom: 140 }}>
-      <Kinetic text={"같은 사람도\n시간대마다 다르다"} start={70} size={76} color={HY.blue} />
+    <div style={{ position: "absolute", left: 140, bottom: 170 }}>
+      <Kinetic text={"같은 사람도\n시간대마다 다르다"} start={70} size={70} color={HY.lightSand} />
     </div>
   </AbsoluteFill>
 );
@@ -83,7 +83,7 @@ const Stats: React.FC = () => (
 const Logo: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: HY.night, fontFamily: FONT, alignItems: "center", justifyContent: "center" }}>
+    <AbsoluteFill style={{ background: HY.blue, fontFamily: FONT, alignItems: "center", justifyContent: "center" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 44 }}>
         <PixelLogo size={170} colors={LOGO} at={4} />
         <div style={{ fontSize: 150, fontWeight: 800, color: HY.lightSand, letterSpacing: "-0.04em", opacity: p(f, 18, 18), translate: `${(1 - p(f, 18, 18)) * 40}px 0` }}>집중잔량</div>
@@ -101,7 +101,7 @@ const Logo: React.FC = () => {
 const Outro: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: HY.night, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
+    <AbsoluteFill style={{ background: HY.blue, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 28, opacity: p(f, 0, 18) }}>
         <PixelLogo size={84} colors={LOGO} />
         <span style={{ fontSize: 64, fontWeight: 800, color: HY.lightSand }}>집중잔량</span>
@@ -120,53 +120,52 @@ const Outro: React.FC = () => {
 
 type Next = { pres: TransitionPresentation<Record<string, unknown>>; d: number };
 
-const SC = { look: LOOK, theme: NIGHT, logo: LOGO };
 
 const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
-  { name: "공감", d: 120, C: Hook, next: { pres: circle(140 + 13 * 62 + 26, 560) as never, d: 16 } },
-  { name: "문제 숫자", d: 140, C: Stats, next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 } },
-  { name: "로고", d: 80, C: Logo, next: { pres: circle(960, 470) as never, d: 16 } },
+  { name: "공감", d: 120, C: Hook, next: { pres: fade() as never, d: 20 } },
+  { name: "문제 숫자", d: 140, C: Stats, next: { pres: fade() as never, d: 20 } },
+  { name: "로고", d: 80, C: Logo, next: { pres: fade() as never, d: 20 } },
   {
     name: "18:40 출발",
     d: 188,
-    C: () => <Story {...SC} when="오후 6:40 퇴근길" what="나의 집중 잔량" line="충전 칸이 적은 시간, 지금이 평소 흐트러지는 때" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 0.5, rate: 1.2 }} focus={[460, 560]} zoom={[26, 50, 128, 152]} k={1.8} />,
-    next: { pres: wipe({ direction: "from-bottom" }) as never, d: 14 },
+    C: () => <Cinema when="오후 6:40 퇴근길" line="충전 칸이 적은 시간, 지금이 평소 흐트러지는 때" rec={{ src: "j3.mp4", from: 0.5, rate: 1.2 }} side="right" />,
+    next: { pres: fade() as never, d: 20 },
   },
   {
     name: "지난 3주",
     d: 150,
-    C: () => <Story {...SC} when="지난 3주, 이 시간대" what="지나친 갈림길" line="깜빡이 놓침에 더해, 안내받고 지나친 갈림길도 센다" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 2, rate: 1 }} focus={[330, 420]} zoom={[18, 42, 112, 134]} k={2.5} />,
-    next: { pres: slide({ direction: "from-right" }) as never, d: 14 },
+    C: () => <Cinema when="지난 3주, 이 시간대" line="깜빡이 놓침에 더해, 안내받고 지나친 갈림길도 센다" rec={{ src: "j3.mp4", from: 2, rate: 1 }} side="left" />,
+    next: { pres: fade() as never, d: 20 },
   },
   {
     name: "18:52 주행 중",
     d: 246,
-    C: () => <Story {...SC} when="오후 6:52 주행 중" what="도움 모드" line="회전 앞에서 한 번 더, 떠오른 생각은 말로" clock="오후 6:52" car={{ speed: 42, gear: "D" }} rec={{ src: "j1.mp4", from: 8, rate: 1.4 }} focus={[460, 760]} zoom={[150, 172, 222, 244]} k={1.5} />,
-    next: { pres: circle(960, 700) as never, d: 16 },
+    C: () => <Cinema when="오후 6:52 주행 중" line="회전 앞에서 한 번 더, 떠오른 생각은 말로" rec={{ src: "j1.mp4", from: 8, rate: 1.4 }} side="right" />,
+    next: { pres: fade() as never, d: 20 },
   },
   {
     name: "19:10 P단",
     d: 196,
-    C: () => <Story {...SC} when="오후 7:10 도착" what="생각 주차장" line="주차하면 보관한 생각을 돌려준다" clock="오후 7:10" car={{ speed: 0, gear: "P" }} rec={{ src: "j2.mp4", from: 0.5, rate: 1 }} focus={[460, 560]} zoom={[30, 54, 150, 172]} k={1.6} />,
-    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
+    C: () => <Cinema when="오후 7:10 도착" line="주차하면 보관한 생각을 돌려준다" rec={{ src: "j2.mp4", from: 0.5, rate: 1 }} side="left" />,
+    next: { pres: fade() as never, d: 20 },
   },
   {
     name: "19:11 내리기 전",
     d: 225,
-    C: () => <Story {...SC} when="오후 7:11 내리기 전" what="세운 자리" line="몇 층 어디에 세웠는지 말로 남기고, 원하면 휴대폰으로" clock="오후 7:11" car={{ speed: 0, gear: "P" }} rec={{ src: "j5.mp4", from: 3, rate: 1.6 }} focus={[460, 740]} zoom={[30, 54, 170, 195]} k={1.6} />,
-    next: { pres: wipe({ direction: "from-right" }) as never, d: 16 },
+    C: () => <Cinema when="오후 7:11 내리기 전" line="몇 층 어디에 세웠는지 말로 남기고, 원하면 휴대폰으로" rec={{ src: "j5.mp4", from: 3, rate: 1.6 }} side="right" />,
+    next: { pres: fade() as never, d: 20 },
   },
   {
     name: "주말",
     d: 150,
-    C: () => <Story {...SC} when="주말" what="이번 주 집중 지도" line="평일 퇴근길에 가장 자주 흐트러졌다" clock="오전 10:02" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 0.5, rate: 1.2, landscape: true }} focus={[1250, 640]} zoom={[30, 54, 110, 134]} k={1.6} />,
-    next: { pres: slide({ direction: "from-left" }) as never, d: 14 },
+    C: () => <Cinema when="주말" line="평일 퇴근길에 가장 자주 흐트러졌다" rec={{ src: "j4.mp4", from: 0.5, rate: 1.2, landscape: true }} side="left" />,
+    next: { pres: fade() as never, d: 20 },
   },
   {
     name: "주말 도움 모드 효과",
     d: 150,
-    C: () => <Story {...SC} when="주말" what="도움 모드 효과" line="도움 모드를 켠 날, 퇴근길 놓침은 51%에서 16%로" clock="오전 10:03" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 5, rate: 1, landscape: true }} focus={[340, 700]} zoom={[18, 42, 112, 134]} k={2} />,
-    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
+    C: () => <Cinema when="주말" line="도움 모드를 켠 날, 퇴근길 놓침은 51%에서 16%로" rec={{ src: "j4.mp4", from: 5, rate: 1, landscape: true }} side="right" />,
+    next: { pres: fade() as never, d: 20 },
   },
   {
     name: "판정 엔진",
@@ -180,7 +179,7 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
         outputs={["출발 시 먼저 알림", "회전 전 한 번 더 안내", "P단에서 메모·세운 자리", "내리기 전 확인", "켠 날·끈 날 비교"]}
       />
     ),
-    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
+    next: { pres: fade() as never, d: 20 },
   },
   { name: "마무리", d: 160, C: Outro },
 ];
@@ -203,7 +202,8 @@ export const JipjungVideo: React.FC = () => {
           </React.Fragment>
         ))}
       </TransitionSeries>
-      <RepoChip repo="jipjungjanryang" dark opacity={p(f, CHIP_FROM, 16) * (1 - p(f, CHIP_TO - 10, 10))} />
+      <Letterbox />
+      <RepoChip repo="jipjungjanryang" dark pos={{ right: 48, top: 7 }} opacity={p(f, CHIP_FROM, 16) * (1 - p(f, CHIP_TO - 10, 10))} />
     </AbsoluteFill>
   );
 };

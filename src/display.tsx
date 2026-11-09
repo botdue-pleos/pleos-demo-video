@@ -161,9 +161,9 @@ export const Camera: React.FC<{
 };
 
 /** 저장소 주소와 QR (오른쪽 위, 작게) */
-export const RepoChip: React.FC<{ repo: string; dark: boolean; opacity: number }> = ({ repo, dark, opacity }) => (
+export const RepoChip: React.FC<{ repo: string; dark: boolean; opacity: number; pos?: React.CSSProperties }> = ({ repo, dark, opacity, pos = { right: 48, top: 40 } }) => (
   <AbsoluteFill style={{ opacity, pointerEvents: "none" }}>
-    <div style={{ position: "absolute", right: 48, top: 40, display: "flex", alignItems: "center", gap: 16, background: "#fff", borderRadius: 20, padding: 10, paddingLeft: 22, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.35)" : "0 10px 30px rgba(0,20,50,0.16)", fontFamily: FONT }}>
+    <div style={{ position: "absolute", ...pos, display: "flex", alignItems: "center", gap: 16, background: "#fff", borderRadius: 20, padding: 10, paddingLeft: 22, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.35)" : "0 10px 30px rgba(0,20,50,0.16)", fontFamily: FONT }}>
       <div style={{ textAlign: "right" }}>
         <div style={{ fontSize: 18, fontWeight: 700, color: HY.sub }}>코드와 APK 보기</div>
         <div style={{ fontSize: 20, fontWeight: 800, color: HY.blue }}>github.com/botdue-pleos/{repo}</div>
