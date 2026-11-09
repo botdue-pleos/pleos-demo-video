@@ -1,12 +1,12 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { TransitionPresentation, TransitionSeries } from "@remotion/transitions";
-import { fade } from "@remotion/transitions/fade";
+import { slide } from "@remotion/transitions/slide";
+import { wipe } from "@remotion/transitions/wipe";
 import { RepoBig } from "./common";
-import { RepoChip } from "./display";
-import { EngineFlow, Look } from "./story";
-import { Cinema, Letterbox } from "./grammar";
-import { FONT, HY, Kinetic, Line, PixelLogo, ease, p, pop } from "./kit";
+import { NIGHT, RepoChip } from "./display";
+import { EngineFlow, Look, Story } from "./story";
+import { FONT, HY, Kinetic, Line, PixelLogo, circle, ease, p, pop } from "./kit";
 
 /*
  * 집중잔량 시연 영상. 1920x1080 30fps, 무음·자막.
@@ -120,52 +120,53 @@ const Outro: React.FC = () => {
 
 type Next = { pres: TransitionPresentation<Record<string, unknown>>; d: number };
 
+const SC = { look: LOOK, theme: NIGHT, logo: LOGO };
 
 const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
-  { name: "공감", d: 120, C: Hook, next: { pres: fade() as never, d: 20 } },
-  { name: "문제 숫자", d: 140, C: Stats, next: { pres: fade() as never, d: 20 } },
-  { name: "로고", d: 80, C: Logo, next: { pres: fade() as never, d: 20 } },
+  { name: "공감", d: 120, C: Hook, next: { pres: circle(140 + 13 * 62 + 26, 560) as never, d: 16 } },
+  { name: "문제 숫자", d: 140, C: Stats, next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 } },
+  { name: "로고", d: 80, C: Logo, next: { pres: circle(960, 470) as never, d: 16 } },
   {
     name: "18:40 출발",
     d: 188,
-    C: () => <Cinema when="오후 6:40 퇴근길" line="충전 칸이 적은 시간, 지금이 평소 흐트러지는 때" rec={{ src: "j3.mp4", from: 0.5, rate: 1.2 }} side="right" />,
-    next: { pres: fade() as never, d: 20 },
+    C: () => <Story {...SC} when="오후 6:40 퇴근길" what="나의 집중 잔량" line="충전 칸이 적은 시간, 지금이 평소 흐트러지는 때" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 0.5, rate: 1.2 }} focus={[460, 470]} zoom={[26, 50, 128, 152]} k={1.5} />,
+    next: { pres: wipe({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
     name: "지난 3주",
     d: 150,
-    C: () => <Cinema when="지난 3주, 이 시간대" line="깜빡이 놓침에 더해, 안내받고 지나친 갈림길도 센다" rec={{ src: "j3.mp4", from: 2, rate: 1 }} side="left" />,
-    next: { pres: fade() as never, d: 20 },
+    C: () => <Story {...SC} when="지난 3주, 이 시간대" what="지나친 갈림길" line="깜빡이 놓침에 더해, 안내받고 지나친 갈림길도 센다" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 2, rate: 1 }} focus={[460, 860]} zoom={[18, 42, 112, 134]} k={2.1} />,
+    next: { pres: slide({ direction: "from-right" }) as never, d: 14 },
   },
   {
     name: "18:52 주행 중",
     d: 246,
-    C: () => <Cinema when="오후 6:52 주행 중" line="회전 앞에서 한 번 더, 떠오른 생각은 말로" rec={{ src: "j1.mp4", from: 8, rate: 1.4 }} side="right" />,
-    next: { pres: fade() as never, d: 20 },
+    C: () => <Story {...SC} when="오후 6:52 주행 중" what="도움 모드" line="회전 앞에서 한 번 더, 떠오른 생각은 말로" clock="오후 6:52" car={{ speed: 42, gear: "D" }} rec={{ src: "j1.mp4", from: 8, rate: 1.4 }} focus={[460, 760]} zoom={[150, 172, 222, 244]} k={1.5} />,
+    next: { pres: circle(960, 700) as never, d: 16 },
   },
   {
     name: "19:10 P단",
     d: 196,
-    C: () => <Cinema when="오후 7:10 도착" line="주차하면 보관한 생각을 돌려준다" rec={{ src: "j2.mp4", from: 0.5, rate: 1 }} side="left" />,
-    next: { pres: fade() as never, d: 20 },
+    C: () => <Story {...SC} when="오후 7:10 도착" what="생각 주차장" line="주차하면 보관한 생각을 돌려준다" clock="오후 7:10" car={{ speed: 0, gear: "P" }} rec={{ src: "j2.mp4", from: 0.5, rate: 1 }} focus={[460, 560]} zoom={[30, 54, 150, 172]} k={1.6} />,
+    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
     name: "19:11 내리기 전",
     d: 225,
-    C: () => <Cinema when="오후 7:11 내리기 전" line="몇 층 어디에 세웠는지 말로 남기고, 원하면 휴대폰으로" rec={{ src: "j5.mp4", from: 3, rate: 1.6 }} side="right" />,
-    next: { pres: fade() as never, d: 20 },
+    C: () => <Story {...SC} when="오후 7:11 내리기 전" what="세운 자리" line="몇 층 어디에 세웠는지 말로 남기고, 원하면 휴대폰으로" clock="오후 7:11" car={{ speed: 0, gear: "P" }} rec={{ src: "j5.mp4", from: 3, rate: 1.6 }} focus={[460, 740]} zoom={[30, 54, 170, 195]} k={1.6} />,
+    next: { pres: wipe({ direction: "from-right" }) as never, d: 16 },
   },
   {
     name: "주말",
     d: 150,
-    C: () => <Cinema when="주말" line="평일 퇴근길에 가장 자주 흐트러졌다" rec={{ src: "j4.mp4", from: 0.5, rate: 1.2, landscape: true }} side="left" />,
-    next: { pres: fade() as never, d: 20 },
+    C: () => <Story {...SC} when="주말" what="이번 주 집중 지도" line="평일 퇴근길에 가장 자주 흐트러졌다" clock="오전 10:02" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 0.5, rate: 1.2, landscape: true }} focus={[1250, 640]} zoom={[30, 54, 110, 134]} k={1.6} />,
+    next: { pres: slide({ direction: "from-left" }) as never, d: 14 },
   },
   {
     name: "주말 도움 모드 효과",
     d: 150,
-    C: () => <Cinema when="주말" line="도움 모드를 켠 날, 퇴근길 놓침은 51%에서 16%로" rec={{ src: "j4.mp4", from: 5, rate: 1, landscape: true }} side="right" />,
-    next: { pres: fade() as never, d: 20 },
+    C: () => <Story {...SC} when="주말" what="도움 모드 효과" line="도움 모드를 켠 날, 퇴근길 놓침은 51%에서 16%로" clock="오전 10:03" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 5, rate: 1, landscape: true }} focus={[340, 700]} zoom={[18, 42, 112, 134]} k={2} />,
+    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
     name: "판정 엔진",
@@ -179,7 +180,7 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
         outputs={["출발 시 먼저 알림", "회전 전 한 번 더 안내", "P단에서 메모·세운 자리", "내리기 전 확인", "켠 날·끈 날 비교"]}
       />
     ),
-    next: { pres: fade() as never, d: 20 },
+    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   { name: "마무리", d: 160, C: Outro },
 ];
@@ -202,8 +203,7 @@ export const JipjungVideo: React.FC = () => {
           </React.Fragment>
         ))}
       </TransitionSeries>
-      <Letterbox />
-      <RepoChip repo="jipjungjanryang" dark pos={{ right: 48, top: 7 }} opacity={p(f, CHIP_FROM, 16) * (1 - p(f, CHIP_TO - 10, 10))} />
+      <RepoChip repo="jipjungjanryang" dark opacity={p(f, CHIP_FROM, 16) * (1 - p(f, CHIP_TO - 10, 10))} />
     </AbsoluteFill>
   );
 };
