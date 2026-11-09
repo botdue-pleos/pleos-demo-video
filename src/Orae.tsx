@@ -152,7 +152,7 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
   {
     name: "다음 주말",
     d: 160,
-    C: () => <Story {...SC} when="다음 주말, 다시 가족과" what="조건 지킨 기록" line="함께 정한 조건을 얼마나 지켰는지, 같이 본다" clock="오후 2:10" car={{ speed: 0, gear: "P" }} rec={{ src: "o6.mp4", from: 0.5, rate: 1, landscape: true }} focus={[480, 1120]} zoom={[20, 44, 122, 144]} k={1.8} />,
+    C: () => <Story {...SC} when="다음 주말, 다시 가족과" what="조건 지킨 기록" line="함께 정한 조건을 얼마나 지켰는지, 같이 본다" clock="오후 2:10" car={{ speed: 0, gear: "P" }} rec={{ src: "o6.mp4", from: 0.5, rate: 1, landscape: true }} focus={[480, 1000]} zoom={[20, 44, 122, 144]} k={1.8} />,
     next: { pres: circle(960, 760) as never, d: 16 },
   },
   {

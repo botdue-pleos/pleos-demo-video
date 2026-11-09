@@ -4,7 +4,7 @@
 
 | 영상 | 길이 | 앱 저장소 |
 | --- | --- | --- |
-| [오래운전](out/오래운전_시연영상_v8.mp4) | 70초 | [botdue-pleos/oraeunjeon](https://github.com/botdue-pleos/oraeunjeon) |
+| [오래운전](out/오래운전_시연영상_v9.mp4) | 70초 | [botdue-pleos/oraeunjeon](https://github.com/botdue-pleos/oraeunjeon) |
 | [집중잔량](out/집중잔량_시연영상_v8.mp4) | 60초 | [botdue-pleos/jipjungjanryang](https://github.com/botdue-pleos/jipjungjanryang) |
 | [니어바이](out/니어바이_시연영상_v8.mp4) | 70초 | [botdue-pleos/pleos-nearby](https://github.com/botdue-pleos/pleos-nearby) |
 
