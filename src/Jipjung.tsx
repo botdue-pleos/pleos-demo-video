@@ -13,7 +13,7 @@ import { FONT, HY, Kinetic, Line, PixelLogo, circle, ease, p, pop } from "./kit"
  * 공감 → 문제 숫자 → 로고 → 실제 녹화 7장면 → 판정 엔진 → 마무리.
  */
 
-const LOOK: Look = { bg: HY.blue, ink: HY.lightSand, sub: HY.skyBlue, accent: HY.activeBlue };
+const LOOK: Look = { bg: HY.night, ink: HY.lightSand, sub: HY.skyBlue, accent: HY.activeBlue };
 const LOGO = [HY.activeBlue, HY.activeBlue, HY.deepBlue, HY.activeBlue, HY.sand, HY.deepBlue, HY.activeBlue, HY.activeBlue, HY.activeBlue];
 
 /** 6시~24시 막대 높이 (앱의 하루 집중 곡선과 같은 모양) */
@@ -22,16 +22,29 @@ const CURVE = [1, 1, 1, 1, 3, 1, 2, 1, 2, 2, 4, 1, 6, 2, 4, 2, 2, 1];
 const Hook: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: HY.blue, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
+    <AbsoluteFill style={{ background: HY.night, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
       <Kinetic text={"퇴근길, 약효가 떨어질 즈음\n회전 안내를 또 놓쳤다"} start={6} size={88} color={HY.lightSand} />
       <div style={{ display: "flex", gap: 10, marginTop: 64, alignItems: "flex-end" }}>
         {CURVE.map((h, col) => (
           <div key={col} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {Array.from({ length: 6 }, (_, row) => {
-              const lit = 6 - row <= h;
+              // 앱과 같은 충전 칸: 잘 따른 시간일수록 칸이 찬다. 저녁 3시간은 충전 빛(Active Blue)
+              const charge = 7 - h;
+              const filled = 6 - row <= charge;
               const evening = col >= 12 && col <= 14;
               const a = pop(f, 46 + col * 2 + (5 - row) * 1.5, 14);
-              return <div key={row} style={{ width: 52, height: 52, borderRadius: 10, background: lit ? (evening ? HY.sand : "#3A7FB8") : HY.deepBlue, scale: String(lit ? a : 1), opacity: lit ? a : 1 }} />;
+              const color = evening ? HY.activeBlue : "#3A7FB8";
+              return (
+                <div
+                  key={row}
+                  style={{
+                    width: 52, height: 52, borderRadius: 8, boxSizing: "border-box",
+                    background: filled ? color : "transparent",
+                    border: filled ? "none" : `3px solid ${evening ? HY.activeBlue : "#2A5A8F"}`,
+                    scale: String(filled ? a : 1), opacity: filled ? a : p(f, 40, 12),
+                  }}
+                />
+              );
             })}
           </div>
         ))}
@@ -56,7 +69,7 @@ const Stat: React.FC<{ big: string; label: string; src: string; at: number }> = 
 };
 
 const Stats: React.FC = () => (
-  <AbsoluteFill style={{ background: HY.lightSand, fontFamily: FONT, padding: "150px 140px" }}>
+  <AbsoluteFill style={{ background: HY.daySky, fontFamily: FONT, padding: "150px 140px" }}>
     <div style={{ display: "flex", gap: 140 }}>
       <Stat at={4} big="4.85배" label="20세 이상 ADHD 진료 인원, 2020년 2만 5,297명에서 2024년 12만 2,614명" src="출처: 국민건강보험공단 자료, 남인순 의원실 분석 (헤럴드경제 2025.10.07 보도)" />
       <Stat at={28} big="38~42%" label="ADHD 약을 먹은 달의 운전 사고 위험 감소 (남성 38%, 여성 42%)" src="출처: Chang et al., JAMA Psychiatry 2017 (미국 청구자료 230만 명)" />
@@ -70,7 +83,7 @@ const Stats: React.FC = () => (
 const Logo: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: HY.blue, fontFamily: FONT, alignItems: "center", justifyContent: "center" }}>
+    <AbsoluteFill style={{ background: HY.night, fontFamily: FONT, alignItems: "center", justifyContent: "center" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 44 }}>
         <PixelLogo size={170} colors={LOGO} at={4} />
         <div style={{ fontSize: 150, fontWeight: 800, color: HY.lightSand, letterSpacing: "-0.04em", opacity: p(f, 18, 18), translate: `${(1 - p(f, 18, 18)) * 40}px 0` }}>집중잔량</div>
@@ -88,7 +101,7 @@ const Logo: React.FC = () => {
 const Outro: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: HY.blue, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
+    <AbsoluteFill style={{ background: HY.night, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 28, opacity: p(f, 0, 18) }}>
         <PixelLogo size={84} colors={LOGO} />
         <span style={{ fontSize: 64, fontWeight: 800, color: HY.lightSand }}>집중잔량</span>
@@ -116,7 +129,7 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
   {
     name: "18:40 출발",
     d: 188,
-    C: () => <Story {...SC} when="오후 6:40 퇴근길" what="나의 집중 곡선" line="지금은 평소에 집중이 흐트러지는 시간" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 0.5, rate: 1.2 }} focus={[460, 560]} zoom={[26, 50, 128, 152]} k={1.8} />,
+    C: () => <Story {...SC} when="오후 6:40 퇴근길" what="나의 집중 잔량" line="충전 칸이 적은 시간, 지금이 평소 흐트러지는 때" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 0.5, rate: 1.2 }} focus={[460, 560]} zoom={[26, 50, 128, 152]} k={1.8} />,
     next: { pres: wipe({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
@@ -134,13 +147,13 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
   {
     name: "19:10 P단",
     d: 196,
-    C: () => <Story {...SC} when="오후 7:10 도착" what="생각 주차장" line="주차하면 보관한 생각을 돌려준다" clock="오후 7:10" car={{ speed: 0, gear: "P" }} rec={{ src: "j1.mp4", from: 19.5, rate: 1.3 }} focus={[460, 560]} zoom={[30, 54, 150, 172]} k={1.6} />,
+    C: () => <Story {...SC} when="오후 7:10 도착" what="생각 주차장" line="주차하면 보관한 생각을 돌려준다" clock="오후 7:10" car={{ speed: 0, gear: "P" }} rec={{ src: "j2.mp4", from: 0.5, rate: 1 }} focus={[460, 560]} zoom={[30, 54, 150, 172]} k={1.6} />,
     next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
     name: "19:11 내리기 전",
     d: 225,
-    C: () => <Story {...SC} when="오후 7:11 내리기 전" what="세운 자리" line="몇 층 어디에 세웠는지 말로 남기고, 원하면 휴대폰으로" clock="오후 7:11" car={{ speed: 0, gear: "P" }} rec={{ src: "j5.mp4", from: 3.5, rate: 2 }} focus={[460, 740]} zoom={[30, 54, 170, 195]} k={1.6} />,
+    C: () => <Story {...SC} when="오후 7:11 내리기 전" what="세운 자리" line="몇 층 어디에 세웠는지 말로 남기고, 원하면 휴대폰으로" clock="오후 7:11" car={{ speed: 0, gear: "P" }} rec={{ src: "j5.mp4", from: 3, rate: 1.6 }} focus={[460, 740]} zoom={[30, 54, 170, 195]} k={1.6} />,
     next: { pres: wipe({ direction: "from-right" }) as never, d: 16 },
   },
   {

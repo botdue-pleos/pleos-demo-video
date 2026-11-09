@@ -13,7 +13,7 @@ import { CountUp, FONT, HY, Kinetic, Line, PixelLogo, TurnCell, circle, ease, p,
  * 공감 → 문제 숫자 → 로고 → 실제 녹화 8장면 → 판정 엔진 → 마무리.
  */
 
-const LOOK: Look = { bg: HY.lightSand, ink: HY.blue, sub: HY.sub, accent: HY.goldText };
+const LOOK: Look = { bg: HY.daySky, ink: HY.blue, sub: HY.sub, accent: HY.goldText };
 const DARK_LOOK: Look = { bg: HY.blue, ink: HY.lightSand, sub: HY.skyBlue, accent: "#D9A07F" };
 const LOGO = [HY.blue, HY.blue, HY.sand, HY.blue, HY.blue, HY.gold, HY.blue, HY.blue, HY.sand];
 
@@ -23,7 +23,7 @@ const HOOK_TURNS = [true, true, true, false, true, true, true, true, false, true
 const Hook: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: HY.lightSand, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
+    <AbsoluteFill style={{ background: HY.daySky, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
       <Kinetic text={"명절에 탄 부모님 차,\n깜빡이 없이 차선을 바꾸셨다"} start={6} size={92} color={HY.blue} />
       <div style={{ display: "flex", gap: 18, marginTop: 70 }}>
         {HOOK_TURNS.map((on, i) => (
@@ -64,7 +64,7 @@ const Stats: React.FC = () => (
 const Logo: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: HY.lightSand, fontFamily: FONT, alignItems: "center", justifyContent: "center" }}>
+    <AbsoluteFill style={{ background: HY.daySky, fontFamily: FONT, alignItems: "center", justifyContent: "center" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 44 }}>
         <PixelLogo size={170} colors={LOGO} at={4} />
         <div style={{ fontSize: 150, fontWeight: 800, color: HY.blue, letterSpacing: "-0.04em", opacity: p(f, 18, 18), translate: `${(1 - p(f, 18, 18)) * 40}px 0` }}>오래운전</div>
@@ -82,7 +82,7 @@ const Logo: React.FC = () => {
 const Outro: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: HY.lightSand, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
+    <AbsoluteFill style={{ background: HY.daySky, fontFamily: FONT, padding: "0 140px", justifyContent: "center" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 28, opacity: p(f, 0, 18) }}>
         <PixelLogo size={84} colors={LOGO} />
         <span style={{ fontSize: 64, fontWeight: 800, color: HY.blue }}>오래운전</span>
@@ -110,43 +110,43 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
   {
     name: "1주차 아침",
     d: 165,
-    C: () => <Story {...SC} when="1주차 아침" what="출발 인사" line="시동을 걸면 먼저 묻는다, 오늘 어디 가세요?" clock="오전 8:12" car={{ speed: 0, gear: "P" }} rec={{ src: "o1.mp4", from: 3, rate: 1.3 }} focus={[460, 330]} zoom={[20, 44, 88, 108]} k={1.7} />,
+    C: () => <Story {...SC} when="1주차 아침" what="출발 인사" line="시동을 걸면 먼저 묻는다, 오늘 어디 가세요?" clock="오전 8:12" car={{ speed: 0, gear: "P" }} rec={{ src: "o1.mp4", from: 0.5, rate: 1 }} focus={[460, 330]} zoom={[20, 44, 88, 108]} k={1.7} />,
     next: { pres: slide({ direction: "from-right" }) as never, d: 14 },
   },
   {
     name: "5주차",
     d: 236,
-    C: () => <Story {...SC} when="5주차" what="나만의 기준선" line="평소보다 자주 놓치면, 본인에게 먼저 알린다" clock="오전 8:31" car={{ speed: 0, gear: "P" }} rec={{ src: "o1.mp4", from: 12.5, rate: 1.4 }} focus={[450, 470]} zoom={[128, 150, 205, 228]} k={1.75} />,
+    C: () => <Story {...SC} when="5주차" what="나만의 기준선" line="평소보다 자주 놓치면, 본인에게 먼저 알린다" clock="오전 8:31" car={{ speed: 0, gear: "P" }} rec={{ src: "o1b.mp4", from: 0.5, rate: 1 }} focus={[450, 470]} zoom={[128, 150, 205, 228]} k={1.75} />,
     next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
     name: "5주차 그다음",
     d: 190,
-    C: () => <Story {...SC} when="5주차, 그다음" what="다음 할 일" line="가까운 곳에서 무료로 확인해 볼 수 있게, 길을 열어 둔다" clock="오전 8:32" car={{ speed: 0, gear: "P" }} rec={{ src: "o5.mp4", from: 2.4, rate: 1.3 }} focus={[460, 1040]} zoom={[44, 66, 118, 134]} k={1.7} />,
+    C: () => <Story {...SC} when="5주차, 그다음" what="다음 할 일" line="가까운 곳에서 무료로 확인해 볼 수 있게, 길을 열어 둔다" clock="오전 8:32" car={{ speed: 0, gear: "P" }} rec={{ src: "o5.mp4", from: 0.5, rate: 1 }} focus={[460, 1040]} zoom={[44, 66, 118, 134]} k={1.7} />,
     next: { pres: circle(960, 700) as never, d: 16 },
   },
   {
     name: "6주차 주행 중",
     d: 150,
-    C: () => <Story {...SC} when="6주차 주행 중" what="깜빡이 알림" line="회전 200m 앞에서 한 번 더" clock="오전 9:05" car={{ speed: 38, gear: "D" }} rec={{ src: "o2.mp4", from: 9, rate: 1.2 }} focus={[460, 1060]} zoom={[68, 90, 132, 150]} k={1.8} />,
+    C: () => <Story {...SC} when="6주차 주행 중" what="깜빡이 알림" line="회전 200m 앞에서 한 번 더" clock="오전 9:05" car={{ speed: 38, gear: "D" }} rec={{ src: "o2.mp4", from: 7.5, rate: 1.2 }} focus={[460, 1060]} zoom={[68, 90, 132, 150]} k={1.8} />,
     next: { pres: wipe({ direction: "from-right" }) as never, d: 16 },
   },
   {
     name: "주말 가족과",
     d: 180,
-    C: () => <Story {...SC} when="주말, 가족과" what="같이 보기" line="반납 말고, 계속 운전할 조건을 함께 정한다" clock="오후 2:20" car={{ speed: 0, gear: "P" }} rec={{ src: "o3.mp4", from: 0.8, rate: 1.3, landscape: true }} focus={[1400, 860]} zoom={[40, 64, 150, 175]} k={1.8} />,
+    C: () => <Story {...SC} when="주말, 가족과" what="같이 보기" line="반납 말고, 계속 운전할 조건을 함께 정한다" clock="오후 2:20" car={{ speed: 0, gear: "P" }} rec={{ src: "o3.mp4", from: 1.5, rate: 1.3, landscape: true }} focus={[1400, 860]} zoom={[40, 64, 150, 175]} k={1.8} />,
     next: { pres: circle(960, 650) as never, d: 16 },
   },
   {
     name: "저녁 7시",
     d: 300,
-    C: () => <Story {...SC} when="저녁 7시" what="조건이 작동" line="해가 지면 먼 길은 내일 낮에. 고르는 건 본인" clock="오후 7:10" car={{ speed: 0, gear: "P" }} rec={{ src: "o4.mp4", from: 8.5, rate: 1.4 }} focus={[460, 470]} zoom={[40, 62, 140, 160]} k={1.5} />,
+    C: () => <Story {...SC} when="저녁 7시" what="조건이 작동" line="해가 지면 먼 길은 내일 낮에. 고르는 건 본인" clock="오후 7:10" car={{ speed: 0, gear: "P" }} rec={{ src: "o4.mp4", from: 0.5, rate: 1 }} focus={[460, 470]} zoom={[40, 62, 140, 160]} k={1.5} />,
     next: { pres: slide({ direction: "from-right" }) as never, d: 14 },
   },
   {
     name: "늘 가던 길",
     d: 235,
-    C: () => <Story {...SC} when="늘 가던 읍내 길" what="길 헤맴 감지" line="경로를 몇 번 다시 찾으면, 집으로 안내한다" clock="오후 7:40" car={{ speed: 24, gear: "D" }} rec={{ src: "o4.mp4", from: 22.8, rate: 1.3 }} focus={[460, 760]} zoom={[64, 86, 160, 182]} k={1.4} />,
+    C: () => <Story {...SC} when="늘 가던 읍내 길" what="길 헤맴 감지" line="경로를 몇 번 다시 찾으면, 집으로 안내한다" clock="오후 7:40" car={{ speed: 24, gear: "D" }} rec={{ src: "o7.mp4", from: 2.4, rate: 1.1 }} focus={[460, 760]} zoom={[64, 86, 160, 182]} k={1.4} />,
     next: { pres: wipe({ direction: "from-right" }) as never, d: 16 },
   },
   {
