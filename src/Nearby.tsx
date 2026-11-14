@@ -64,7 +64,7 @@ const Stat: React.FC<{ big: string; label: string; src: string; at: number }> = 
 const Stats: React.FC = () => (
   <AbsoluteFill style={{ background: HY.daySky, fontFamily: FONT, padding: "150px 140px" }}>
     <div style={{ display: "flex", gap: 140 }}>
-      <Stat at={4} big="44%" label="고속도로 2차 사고 치사율 (2024). 전체 교통사고 치사율 10%의 약 4배" src="출처: 인사이트 보도 (insight.co.kr/news/539886)" />
+      <Stat at={4} big="48.3%" label="고속도로 2차 사고 치사율 (2021~2025). 전체 사고의 약 5배" src="출처: 한국도로공사 자료, 박용갑 의원실 분석 (2026 보도)" />
       <Stat at={28} big="44.9%" label="고속도로 터널 사고 중 3대 이상 연쇄 추돌 (2021~2025). 전체 고속도로는 35.5%" src="출처: 한국도로공사 자료, SBS Biz 보도" />
     </div>
     <div style={{ position: "absolute", left: 140, bottom: 140 }}>
@@ -129,13 +129,13 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
   {
     name: "비상등 감사",
     d: 150,
-    C: () => <Story {...SC} when="합류한 뒤" what="비상등 감사 인사" line="끼어든 앞차가 비상등을 짧게 켜면, 뒤차에 고맙다는 말로 전한다" clock="오후 6:21" car={DRIVE} rec={{ src: "n2.mp4", from: 4.5, rate: 1 }} focus={[600, 230]} zoom={[30, 54, 120, 142]} k={1.6} />,
+    C: () => <Story {...SC} when="합류한 뒤" what="비상등 감사 인사" line="끼어든 앞차가 비상등을 짧게 켜면, 뒤차에 고맙다는 말로 전한다" clock="오후 6:21" car={DRIVE} rec={{ src: "n2.mp4", from: 5, rate: 1 }} focus={[600, 230]} zoom={[30, 54, 120, 142]} k={1.6} />,
     next: { pres: slide({ direction: "from-right" }) as never, d: 14 },
   },
   {
     name: "문제 알림",
     d: 140,
-    C: () => <Story {...SC} when="바로 앞 차에게" what="문제 알림" line="남만 볼 수 있는 문제를, 정해진 문구로만 알려 준다" clock="오후 6:21" car={{ speed: 80, gear: "D" }} rec={{ src: "n3.mp4", from: 2.5, rate: 1 }} focus={[600, 230]} zoom={[30, 54, 112, 134]} k={1.6} />,
+    C: () => <Story {...SC} when="바로 앞 차에게" what="문제 알림" line="남만 볼 수 있는 문제를, 정해진 문구로만 알려 준다" clock="오후 6:21" car={{ speed: 80, gear: "D" }} rec={{ src: "n3.mp4", from: 4, rate: 1 }} focus={[600, 230]} zoom={[30, 54, 112, 134]} k={1.6} />,
     next: { pres: wipe({ direction: "from-right" }) as never, d: 16 },
   },
   {
@@ -147,14 +147,26 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
   {
     name: "후방 주의",
     d: 140,
-    C: () => <Story {...SC} when="터널 안, 앞서 가는 차" what="후방 주의" line="누구인지 몰라도, 방향과 시간만으로 대비한다" clock="오후 6:40" car={DRIVE} rec={{ src: "n6.mp4", from: 2.5, rate: 1 }} focus={[600, 260]} zoom={[30, 54, 112, 134]} k={1.6} />,
+    C: () => <Story {...SC} when="터널 안, 앞서 가는 차" what="후방 주의" line="누구인지 몰라도, 방향과 시간만으로 대비한다" clock="오후 6:40" car={DRIVE} rec={{ src: "n6.mp4", from: 4.5, rate: 1 }} focus={[600, 260]} zoom={[30, 54, 112, 134]} k={1.6} />,
     next: { pres: circle(960, 600) as never, d: 16 },
   },
   {
     name: "행동요령 확인",
     d: 360,
-    C: () => <Story {...SC} when="터널 안에 멈춘 차" what="행동요령 확인" line="비상등·트렁크·문 신호로 한 단계씩 확인하고, 남은 것만 말한다" clock="오후 6:41" car={{ speed: 0, gear: "P" }} rec={{ src: "n5.mp4", from: 7, rate: 1.8 }} focus={[620, 520]} zoom={[30, 54, 320, 344]} k={1.5} />,
+    C: () => <Story {...SC} when="터널 안에 멈춘 차" what="행동요령 확인" line="비상등·트렁크·문 신호로 한 단계씩 확인하고, 남은 것만 말한다" clock="오후 6:41" car={{ speed: 0, gear: "P" }} rec={{ src: "n5.mp4", from: 5, rate: 1 }} focus={[620, 520]} zoom={[30, 54, 320, 344]} k={1.5} />,
     next: { pres: slide({ direction: "from-right" }) as never, d: 14 },
+  },
+  {
+    name: "뒤차 재안내",
+    d: 150,
+    C: () => <Story {...SC} when="멈춘 차 500m 뒤" what="뒤차는 알림으로 끝나지 않는다" line="500m 앞에서 한 번 더: 속도를 줄이고 비켜 가세요" clock="오후 6:41" car={DRIVE} rec={{ src: "n9.mp4", from: 3, rate: 1 }} focus={[600, 300]} zoom={[30, 54, 120, 142]} k={1.5} />,
+    next: { pres: slide({ direction: "from-right" }) as never, d: 14 },
+  },
+  {
+    name: "지나간 뒤 확인",
+    d: 270,
+    C: () => <Story {...SC} when="지나간 뒤" what="아직 서 있었나요?" line="'있어/없어' 한마디로 뒤차 알림을 이어 두거나 지운다" clock="오후 6:42" car={DRIVE} rec={{ src: "n10.mp4", from: 3.5, rate: 1.1 }} focus={[600, 300]} zoom={[30, 54, 240, 262]} k={1.5} />,
+    next: { pres: wipe({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
     name: "신고 도우미",
@@ -165,7 +177,7 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
   {
     name: "위험 지점 지도",
     d: 150,
-    C: () => <Story {...SC} when="5분 뒤" what="위험 지점 지도" line="주의보는 사라지고, 칸별 건수만 남는다. 5건 이상 쌓인 곳만" clock="오후 6:47" car={{ speed: 0, gear: "P" }} rec={{ src: "n8.mp4", from: 0.5, rate: 1 }} focus={[560, 600]} zoom={[24, 48, 120, 142]} k={1.5} />,
+    C: () => <Story {...SC} when="5분 뒤" what="위험 지점 지도" line="주의보는 사라지고, 칸별 건수만 남는다. 5건 이상 쌓인 곳만" clock="오후 6:47" car={{ speed: 0, gear: "P" }} rec={{ src: "n8.mp4", from: 3, rate: 1 }} focus={[560, 600]} zoom={[24, 48, 120, 142]} k={1.5} />,
     next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
@@ -174,10 +186,10 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
     C: () => (
       <EngineFlow
         look={LOOK}
-        tests={26}
-        signals={["브레이크·차속 (급제동)", "비상등 Light", "트렁크·문 Door", "내비 경로·합류 지점·터널", "음성 STT"]}
-        rules={["합류 예고", "2대 규칙 주의보", "정차·행동요령 확인", "비상등 감사 인식", "감사·문제 배달"]}
-        outputs={["본선 차에 합류 예정", "전방·후방 주의", "남은 단계만 안내", "뒤차에 감사 문구", "주차 후 신고 안내"]}
+        tests={43}
+        signals={["브레이크·차속 (급제동)", "비상등 Light", "트렁크·문 Door", "내비 경로·합류 지점·터널", "음성 STT (ON_DEVICE)"]}
+        rules={["합류 예고", "2대 규칙 주의보", "정차·행동요령 확인", "비상등 감사 (정체 포함)", "뒤차 재안내·확인"]}
+        outputs={["본선 차에 합류 예정", "전방·후방 주의", "남은 단계만 안내", "뒤차에 감사 문구", "500m 재안내·지나간 뒤 확인"]}
       />
     ),
     next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },

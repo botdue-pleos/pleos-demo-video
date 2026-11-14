@@ -71,8 +71,8 @@ const Stat: React.FC<{ big: string; label: string; src: string; at: number }> = 
 const Stats: React.FC = () => (
   <AbsoluteFill style={{ background: HY.blue, fontFamily: FONT, padding: "190px 140px" }}>
     <div style={{ display: "flex", gap: 140 }}>
-      <Stat at={4} big="4.85배" label="20세 이상 ADHD 진료 인원, 2020년 2만 5,297명에서 2024년 12만 2,614명" src="출처: 국민건강보험공단 자료, 남인순 의원실 분석 (헤럴드경제 2025.10.07 보도)" />
-      <Stat at={28} big="38~42%" label="ADHD 약을 먹은 달의 운전 사고 위험 감소 (남성 38%, 여성 42%)" src="출처: Chang et al., JAMA Psychiatry 2017 (미국 청구자료 230만 명)" />
+      <Stat at={4} big="15.3만" label="20세 이상 ADHD 진료 인원 (2025년, 전체의 48%). 30대는 2020년의 8.6배" src="출처: 국민건강보험공단 자료, 권칠승 의원실 (메디칼타임즈 2026.09.28)" />
+      <Stat at={28} big="1.93배" label="치료받지 않은 ADHD의 교통사고 위험 (4편, 275만 명 메타분석)" src="출처: Childress et al., Advances in Therapy 2026" />
     </div>
     <div style={{ position: "absolute", left: 140, bottom: 170 }}>
       <Kinetic text={"같은 사람도\n시간대마다 다르다"} start={70} size={70} color={HY.lightSand} />
@@ -129,43 +129,49 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
   {
     name: "18:40 출발",
     d: 188,
-    C: () => <Story {...SC} when="오후 6:40 퇴근길" what="나의 집중 잔량" line="충전 칸이 적은 시간, 지금이 평소 흐트러지는 때" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 0.5, rate: 1.2 }} focus={[460, 470]} zoom={[26, 50, 128, 152]} k={1.5} />,
+    C: () => <Story {...SC} when="오후 6:40 퇴근길" what="나의 집중 잔량" line="충전 칸이 적은 시간, 지금이 평소 흐트러지는 때" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 2.5, rate: 1 }} focus={[460, 470]} zoom={[26, 50, 128, 152]} k={1.5} />,
     next: { pres: wipe({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
     name: "지난 3주",
     d: 150,
-    C: () => <Story {...SC} when="지난 3주, 이 시간대" what="지나친 갈림길" line="깜빡이 놓침에 더해, 안내받고 지나친 갈림길도 센다" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 2, rate: 1 }} focus={[460, 860]} zoom={[18, 42, 112, 134]} k={2.1} />,
+    C: () => <Story {...SC} when="지난 3주, 이 시간대" what="지나친 갈림길" line="깜빡이 놓침에 더해, 안내받고 지나친 갈림길도 센다" clock="오후 6:40" car={{ speed: 0, gear: "P" }} rec={{ src: "j3.mp4", from: 3.5, rate: 1 }} focus={[460, 860]} zoom={[18, 42, 112, 134]} k={2.1} />,
     next: { pres: slide({ direction: "from-right" }) as never, d: 14 },
   },
   {
     name: "18:52 주행 중",
     d: 246,
-    C: () => <Story {...SC} when="오후 6:52 주행 중" what="도움 모드" line="회전 앞에서 한 번 더, 떠오른 생각은 말로" clock="오후 6:52" car={{ speed: 42, gear: "D" }} rec={{ src: "j1.mp4", from: 8, rate: 1.4 }} focus={[460, 760]} zoom={[150, 172, 222, 244]} k={1.5} />,
+    C: () => <Story {...SC} when="오후 6:52 주행 중" what="도움 모드" line="화면엔 지금 할 일 한 줄. 떠오른 생각은 '메모'라고 말로" clock="오후 6:52" car={{ speed: 42, gear: "D" }} rec={{ src: "j1.mp4", from: 6, rate: 1.2 }} focus={[460, 700]} zoom={[150, 172, 222, 244]} k={1.5} />,
     next: { pres: circle(960, 700) as never, d: 16 },
   },
   {
     name: "19:10 P단",
     d: 196,
-    C: () => <Story {...SC} when="오후 7:10 도착" what="생각 주차장" line="주차하면 보관한 생각을 돌려준다" clock="오후 7:10" car={{ speed: 0, gear: "P" }} rec={{ src: "j2.mp4", from: 0.5, rate: 1 }} focus={[460, 560]} zoom={[30, 54, 150, 172]} k={1.6} />,
+    C: () => <Story {...SC} when="오후 7:10 도착" what="생각 주차장" line="주차하면 보관한 생각을 돌려준다" clock="오후 7:10" car={{ speed: 0, gear: "P" }} rec={{ src: "j2.mp4", from: 2.5, rate: 1 }} focus={[460, 560]} zoom={[30, 54, 150, 172]} k={1.6} />,
     next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
     name: "19:11 내리기 전",
     d: 225,
-    C: () => <Story {...SC} when="오후 7:11 내리기 전" what="세운 자리" line="몇 층 어디에 세웠는지 말로 남기고, 원하면 휴대폰으로" clock="오후 7:11" car={{ speed: 0, gear: "P" }} rec={{ src: "j5.mp4", from: 3, rate: 1.6 }} focus={[460, 740]} zoom={[30, 54, 170, 195]} k={1.6} />,
+    C: () => <Story {...SC} when="오후 7:11 내리기 전" what="세운 자리" line="몇 층 어디에 세웠는지 말로 남기고, 원하면 휴대폰으로" clock="오후 7:11" car={{ speed: 0, gear: "P" }} rec={{ src: "j5.mp4", from: 3, rate: 1 }} focus={[460, 740]} zoom={[30, 54, 170, 195]} k={1.6} />,
     next: { pres: wipe({ direction: "from-right" }) as never, d: 16 },
   },
   {
     name: "주말",
     d: 150,
-    C: () => <Story {...SC} when="주말" what="이번 주 집중 지도" line="평일 퇴근길에 가장 자주 흐트러졌다" clock="오전 10:02" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 0.5, rate: 1.2, landscape: true }} focus={[1250, 640]} zoom={[30, 54, 110, 134]} k={1.6} />,
+    C: () => <Story {...SC} when="주말" what="이번 주 집중 지도" line="평일 퇴근길에 가장 자주 흐트러졌다" clock="오전 10:02" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 2.5, rate: 1, landscape: true }} focus={[1250, 640]} zoom={[30, 54, 110, 134]} k={1.6} />,
     next: { pres: slide({ direction: "from-left" }) as never, d: 14 },
   },
   {
     name: "주말 도움 모드 효과",
     d: 150,
-    C: () => <Story {...SC} when="주말" what="도움 모드 효과" line="도움 모드를 켠 날, 퇴근길 놓침은 51%에서 16%로" clock="오전 10:03" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 5, rate: 1, landscape: true }} focus={[340, 700]} zoom={[18, 42, 112, 134]} k={2} />,
+    C: () => <Story {...SC} when="주말" what="도움 모드 효과" line="도움 모드를 켠 날, 퇴근길 놓침은 51%에서 16%로" clock="오전 10:03" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 4, rate: 1, landscape: true }} focus={[340, 700]} zoom={[18, 42, 112, 134]} k={2} />,
+    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
+  },
+  {
+    name: "약물운전 개정법 이후",
+    d: 150,
+    C: () => <Story {...SC} when="2026년 4월 약물운전 개정법 이후" what="판정하지 않는다" line="운전 기록만 보여 준다. 복용과 운전은 처방한 의사와" clock="오전 10:04" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 5, rate: 1, landscape: true }} focus={[340, 1060]} zoom={[18, 42, 112, 134]} k={2} />,
     next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
