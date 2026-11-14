@@ -41,6 +41,7 @@ npx remotion studio                       # 미리보기
 npx remotion render Orae out/평소처럼.mp4
 npx remotion render Jipjung out/집중잔량.mp4
 npx remotion render Nearby out/니어바이.mp4
+npx remotion render Daeum out/다음은요.mp4
 ```
 
 Remotion으로 만들었다 (https://www.remotion.dev, 개인·소규모 팀 무료 라이선스).
