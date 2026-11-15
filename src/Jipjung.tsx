@@ -1,4 +1,5 @@
 import React from "react";
+import { PleosReal } from "./real";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { TransitionPresentation, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
@@ -172,6 +173,12 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
     name: "약물운전 개정법 이후",
     d: 150,
     C: () => <Story {...SC} when="2026년 4월 약물운전 개정법 이후" what="판정하지 않는다" line="운전 기록만 보여 준다. 복용과 운전은 처방한 의사와" clock="오전 10:04" car={{ speed: 0, gear: "P" }} rec={{ src: "j4.mp4", from: 5, rate: 1, landscape: true }} focus={[340, 1060]} zoom={[18, 42, 112, 134]} k={2} />,
+    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
+  },
+  {
+    name: "Pleos 실제 화면",
+    d: 240,
+    C: () => <PleosReal src="pj.mp4" from={5.5} line="회전 100m 앞, 지금 할 일 한 줄" accent="#00AAD2" />,
     next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {

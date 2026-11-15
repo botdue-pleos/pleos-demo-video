@@ -1,4 +1,5 @@
 import React from "react";
+import { PleosReal } from "./real";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { TransitionPresentation, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
@@ -209,6 +210,12 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
     name: "이동 노트",
     d: 210,
     C: () => <Story {...SC} when="한 달 뒤, 주차 중" what="이동 노트" line="그 터널은 2분 전부터, 길 바뀜 예고는 1분 전으로" clock="오후 6:30" car={{ speed: 0, gear: "P" }} rec={{ src: "d6.mp4", from: 3, rate: 1, landscape: true }} focus={[1420, 520]} zoom={[40, 64, 170, 192]} k={1.4} />,
+    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
+  },
+  {
+    name: "Pleos 실제 화면",
+    d: 240,
+    C: () => <PleosReal src="pd.mp4" from={6} line="Pleos 세로 1칸 창에 맞춘 오늘의 길 카드" accent="#1C3A37" />,
     next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {

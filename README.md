@@ -4,15 +4,16 @@
 
 | 영상 | 길이 | 앱 저장소 |
 | --- | --- | --- |
-| [평소처럼 (구 오래운전)](out/평소처럼_시연영상_v10.mp4) | 70초 | [botdue-pleos/pyeongsocheoreom](https://github.com/botdue-pleos/pyeongsocheoreom) |
-| [집중잔량](out/집중잔량_시연영상_v9.mp4) | 65초 | [botdue-pleos/jipjungjanryang](https://github.com/botdue-pleos/jipjungjanryang) |
-| [니어바이](out/니어바이_시연영상_v9.mp4) | 83초 | [botdue-pleos/pleos-nearby](https://github.com/botdue-pleos/pleos-nearby) |
-| [다음은요](out/다음은요_시연영상_v2.mp4) | 66초 | [botdue-pleos/daeumeunyo](https://github.com/botdue-pleos/daeumeunyo) |
+| [평소처럼 (구 오래운전)](out/평소처럼_시연영상_v11.mp4) | 77초 | [botdue-pleos/pyeongsocheoreom](https://github.com/botdue-pleos/pyeongsocheoreom) |
+| [집중잔량](out/집중잔량_시연영상_v10.mp4) | 72초 | [botdue-pleos/jipjungjanryang](https://github.com/botdue-pleos/jipjungjanryang) |
+| [니어바이](out/니어바이_시연영상_v10.mp4) | 91초 | [botdue-pleos/pleos-nearby](https://github.com/botdue-pleos/pleos-nearby) |
+| [다음은요](out/다음은요_시연영상_v3.mp4) | 74초 | [botdue-pleos/daeumeunyo](https://github.com/botdue-pleos/daeumeunyo) |
 
 - 1920×1080, 30fps, 무음·자막
 - 앱 화면은 모두 에뮬레이터에서 실제로 동작하는 모습을 녹화한 것이다 (`public/rec/`). 에뮬레이터 화면을 Pleos Connect 앱 창 크기(세로 1칸 920×1330, 가로 2칸 1870×1330)에 맞추고 위아래 시스템 바는 잘라냈다.
 - 통계에는 화면에 출처를 함께 적었다.
 - 니어바이는 차 4대가 같은 도로를 달리는 시연 시나리오를 앱 안에서 재생하며 차마다 시점을 바꿔 녹화했다 (시연 조작판은 숨김).
+- 각 영상에는 Pleos Connect Emulator v2.1.0(2560×1440, 160dpi) 전체 화면을 그대로 녹화한 장면(`public/rec/p*.mp4`, `src/real.tsx`)이 들어 있다. 왼쪽 Pleos 차량 상태, 가운데 앱 세로 1칸, 오른쪽 Pleos 지도가 함께 보이는 실제 실행 화면이다.
 - `screenrecord`는 화면이 바뀔 때만 프레임을 남겨서, 녹화마다 마지막 앱 화면을 10초 이어 붙여 장면 끝까지 멈춘 화면이 유지되게 했다.
 
 ## 구조

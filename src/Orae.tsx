@@ -1,4 +1,5 @@
 import React from "react";
+import { PleosReal } from "./real";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { TransitionPresentation, TransitionSeries } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
@@ -154,6 +155,12 @@ const SCENES: { name: string; d: number; C: React.FC; next?: Next }[] = [
     d: 160,
     C: () => <Story {...SC} when="다음 주말, 다시 가족과" what="조건 지킨 기록" line="함께 정한 조건을 얼마나 지켰는지, 같이 본다" clock="오후 2:10" car={{ speed: 0, gear: "P" }} rec={{ src: "o6.mp4", from: 6, rate: 1, landscape: true }} focus={[480, 1000]} zoom={[20, 44, 122, 144]} k={1.8} />,
     next: { pres: circle(960, 760) as never, d: 16 },
+  },
+  {
+    name: "Pleos 실제 화면",
+    d: 240,
+    C: () => <PleosReal src="po.mp4" from={5.5} line="회전 200m 앞에서 깜빡이를 한 번 더" accent="#002C5F" />,
+    next: { pres: slide({ direction: "from-bottom" }) as never, d: 14 },
   },
   {
     name: "판정 엔진",
